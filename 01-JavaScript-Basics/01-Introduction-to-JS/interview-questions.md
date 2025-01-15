@@ -68,18 +68,22 @@ Here’s a simple JavaScript program that outputs a message to the console:
 ```javascript
 // A simple JavaScript program
 console.log("Hello, World!"); // This will print "Hello, World!" to the console
-
+```
 
 ## 5. Why is JavaScript important in modern web development?
 
 ### **Answer:**
+
 - **Interactive Web Pages**:
+
   - JavaScript enables developers to create interactive web pages that respond to user actions (e.g., button clicks, form submissions).
 
 - **Dynamic Content**:
+
   - It's essential for dynamic content, such as live updates, real-time data, animations, and much more.
 
 - **Core Technology**:
+
   - JavaScript works alongside **HTML** (for structure) and **CSS** (for style), making it one of the three core technologies of web development.
 
 - **Full-stack Development**:
@@ -90,10 +94,13 @@ console.log("Hello, World!"); // This will print "Hello, World!" to the console
 ## 6. Can you explain what ECMAScript is and how it relates to JavaScript?
 
 ### **Answer:**
+
 - **ECMAScript**:
+
   - ECMAScript is a standard for scripting languages, which serves as the foundation for JavaScript.
 
 - **Relation to JavaScript**:
+
   - JavaScript is an implementation of ECMAScript, meaning JavaScript follows the ECMAScript specifications.
 
 - **Evolution of ECMAScript**:
@@ -104,10 +111,13 @@ console.log("Hello, World!"); // This will print "Hello, World!" to the console
 ## 7. What is the role of JavaScript in client-side scripting?
 
 ### **Answer:**
+
 - **Running in the Browser**:
+
   - In client-side scripting, JavaScript runs in the user's browser and manipulates the web page without needing to communicate with the server.
 
 - **Dynamic Changes**:
+
   - It allows for dynamic changes to the content, such as form validation, interactive elements, animations, and handling events (e.g., user clicks).
 
 - **Enhanced User Experience**:
@@ -118,12 +128,14 @@ console.log("Hello, World!"); // This will print "Hello, World!" to the console
 ## 8. Can JavaScript be used for server-side programming?
 
 ### **Answer:**
+
 - **Server-side with Node.js**:
+
   - Yes! JavaScript can be used for server-side programming with **Node.js**.
 
 - **Full-stack Development**:
+
   - Node.js allows you to run JavaScript on the server, enabling full-stack development with JavaScript on both the client and server sides.
 
 - **Common Use Cases**:
   - It’s commonly used for building web servers, APIs, and real-time applications like chat apps.
-```
