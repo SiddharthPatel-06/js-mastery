@@ -225,7 +225,49 @@ console.log(x); // 10
 
 ---
 
-## **9. Best Practices for Variables**
+## **9. Hoisting**
+
+- Hoisting means JavaScript moves variable and function declarations to the top of their scope during the creation phase.
+- var is hoisted and initialized to undefined.
+- let and const are hoisted but not initialized — they stay in the Temporal Dead Zone until the declaration line.
+
+```javascript
+console.log(a); // undefined
+var a = 10;
+
+console.log(b); // ReferenceError
+let b = 20;
+```
+
+## **10. Temporal Dead Zone (TDZ)**
+
+- The period between entering a scope and the variable’s declaration.
+- Accessing the variable in this phase throws a ReferenceError.
+- Applies only to let and const, not var.
+
+```javascript
+{
+  console.log(x); // ReferenceError
+  let x = 5; // TDZ ends here
+}
+```
+
+## **11. Mutable vs Immutable Data**
+
+- Immutable: Cannot change value after creation (primitive types).
+- Mutable: Can change value (non-primitive types).
+
+```javascript
+let name = "Sid";
+name[0] = "P";
+console.log(name); // Sid (immutable)
+
+let arr = [1, 2];
+arr[0] = 99;
+console.log(arr); // [99, 2] (mutable)
+```
+
+## **12. Best Practices for Variables**
 
 1. Use `const` by default; use `let` only when reassignment is needed.
 2. Avoid `var` in modern JavaScript.
@@ -246,7 +288,7 @@ let userAge = 42;
 
 ---
 
-## **10. Common Errors**
+## **13. Common Errors**
 
 1. **ReferenceError**
 
@@ -266,7 +308,7 @@ let userAge = 42;
 
 ---
 
-## **11. Useful Examples for Practice**
+## **14. Useful Examples for Practice**
 
 ### **Declaring and Reassigning Variables**
 

@@ -205,23 +205,7 @@ console.log(String(456)); // Output: "456"
 console.log(Boolean(0)); // Output: false
 ```
 
-## 13. **Explain hoisting in JavaScript.**
-
-### Answer:
-
-Hoisting is JavaScript's default behavior of moving declarations to the top of their scope. Variables declared with `var` are hoisted and initialized as `undefined`. Variables declared with `let` and `const` are hoisted but not initialized.
-
-### Example:
-
-```javascript
-console.log(a); // Output: undefined (hoisted)
-var a = 5;
-
-console.log(b); // Error: Cannot access 'b' before initialization
-let b = 10;
-```
-
-## 14. **What is the difference between `==` and `===` in JavaScript?**
+## 13. **What is the difference between `==` and `===` in JavaScript?**
 
 ### Answer:
 
@@ -234,3 +218,229 @@ let b = 10;
 console.log(5 == "5"); // Output: true (type coercion)
 console.log(5 === "5"); // Output: false (no type coercion)
 ```
+
+## 14. **What is Hoisting in JavaScript?**
+
+**Answer:**
+Hoisting is JavaScript's behavior of moving variable and function declarations to the top of their scope during the creation phase.
+
+- `var` is hoisted and initialized as `undefined`.
+- `let` and `const` are hoisted but remain in the Temporal Dead Zone (TDZ) until the declaration line.
+
+**Example:**
+
+```javascript
+console.log(a); // undefined
+var a = 10;
+
+console.log(b); // ReferenceError: Cannot access 'b' before initialization
+let b = 20;
+```
+
+## 15. **What is the Temporal Dead Zone (TDZ)?**
+
+**Answer:**
+The TDZ is the time between entering a scope and the variable's declaration where the variable exists but is not accessible.
+
+- Accessing it throws a ReferenceError..
+- Only applies to let and const.
+
+**Example:**
+
+```javascript
+{
+  console.log(x); // ReferenceError
+  let x = 5; // TDZ ends here
+}
+```
+
+## 16. **Is function declaration hoisted?**
+
+**Answer:**
+Yes, function declarations are fully hoisted (both name and body), so they can be called before being defined.
+
+**Example:**
+
+```javascript
+greet(); // Output: Hello
+
+function greet() {
+  console.log("Hello");
+}
+```
+
+## 17. **Is function expression hoisted?**
+
+**Answer:**
+
+- With var: Name is hoisted but initialized as undefined (cannot call before assignment).
+
+- With let/const: In TDZ until declaration.
+
+**Example:**
+
+```javascript
+sayHi(); // TypeError: sayHi is not a function
+var sayHi = function () {
+  console.log("Hi");
+};
+```
+
+## 18. **Hoisting Order**
+
+```javascript
+console.log(a);
+var a = 10;
+function a() {}
+console.log(a);
+```
+
+Expected Output:
+
+```javascript
+[Function: a]
+10
+```
+
+Reason:
+
+- Function declarations are hoisted before var declarations.
+- First console.log(a) sees the function.
+- Later var a = 10 overwrites it.
+
+## 19. **const with objects**
+
+```javascript
+const obj = { a: 1 };
+obj.a = 99;
+console.log(obj);
+
+obj = { b: 2 };
+```
+
+Expected Output:
+
+```javascript
+{
+  a: 99;
+}
+TypeError;
+```
+
+Reason: Object properties can change, but you can’t reassign the const variable.
+
+## 20. **let in for loop closure**
+
+```javascript
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+
+Expected Output:
+
+```javascript
+0;
+1;
+2;
+```
+
+Reason: let creates a new variable for each loop iteration.
+
+## 21. **var in for loop closure**
+
+```javascript
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+```
+
+Expected Output:
+
+```javascript
+3;
+3;
+3;
+```
+
+Reason: var has one shared variable updated after loop ends.
+
+## 22. **typeof null bug**
+
+```javascript
+console.log(typeof null);
+```
+
+Expected Output:
+
+```javascript
+object;
+```
+
+Reason: A historical JS bug — null is not an object, but typeof says so.
+
+## 23. **Implicit type conversion in comparisons**
+
+```javascript
+console.log([] == 0);
+console.log([] == []);
+console.log([1] == 1);
+```
+
+Expected Output:
+
+```javascript
+true;
+false;
+true;
+```
+
+Reason:
+
+- [] → "" → 0 when compared with number.
+- Arrays are compared by reference, so [] == [] is false.
+- [1] → "1" → 1.
+
+## 24 **Default parameters with var**
+
+```javascript
+var a = 1;
+function test(a = 2) {
+  console.log(a);
+}
+test();
+test(5);
+```
+
+Expected Output:
+
+```javascript
+2;
+5;
+```
+
+Reason: Default param only applies when argument is undefined.
+
+## **Why — step by step**
+
+### 1. var a = 1;
+
+- This makes a global variable a with value 1.
+
+### 2. function test(a = 2) { ... }
+
+- The function has its own variable named a (a parameter).
+- This local a hides the global a inside the function. So inside the function, a means the parameter, not the global a.
+
+### 3. test() — called with no argument.
+
+- When you call with no value, the parameter a is undefined.
+- The default a = 2 is used because the argument is undefined.
+- So console.log(a) prints 2.
+
+### 4. test(5) — called with the value 5.
+
+- The parameter a is given 5, so default is not used.
+- console.log(a) prints 5.
+
+### 5. The global a (1) is not used inside the function because the function has its own a.

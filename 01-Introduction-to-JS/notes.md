@@ -49,6 +49,5 @@
 ## Writing Your First JavaScript Program
 
 ```javascript
-// A simple JavaScript program
 console.log("Hello, World!"); // This will print "Hello, World!" to the console
 ```
