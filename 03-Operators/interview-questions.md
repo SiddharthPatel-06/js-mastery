@@ -1,219 +1,391 @@
-### 1. **Question: Sum of Odd and Even Numbers**
-Write a function that separates the odd and even numbers from an array and returns their sums.
+# JavaScript Operator Tricky Questions
 
-**Answer:**
+## 1. `+` with strings vs numbers
+
+**Q.** What prints?
+
 ```js
-function sumOddEven(arr) {
-    let oddSum = 0, evenSum = 0;
-    for (let num of arr) {
-        if (num % 2 === 0) {
-            evenSum += num;
-        } else {
-            oddSum += num;
-        }
-    }
-    return { oddSum, evenSum };
-}
-
-console.log(sumOddEven([1, 2, 3, 4, 5])); // { oddSum: 9, evenSum: 6 }
+console.log(1 + "2" + 3);
 ```
-### Explanation:
-This function loops through the array and uses the modulus operator `%` to check if each number is odd or even. It then sums the respective values.
+
+**A.** `"123"`
+**Why:** `1 + "2"` → `"12"` (string). `"12" + 3` → `"123"` (string joins).
 
 ---
 
-### 2. **Question: Find the Largest Number in an Array**
-Write a function that finds the largest number in an array of integers without using the built-in `Math.max` function.
+## 2. `-` forces number
 
-**Answer:**
+**Q.**
+
 ```js
-function findLargest(arr) {
-    let largest = arr[0];
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > largest) {
-            largest = arr[i];
-        }
-    }
-    return largest;
-}
-
-console.log(findLargest([1, 5, 3, 9, 2]));  // 9
+console.log("5" - 3 + 2);
 ```
-### Explanation:
-The function loops through the array and uses the greater-than operator (`>`) to compare each element to the current largest value, updating as needed.
+
+**A.** `4`
+**Why:** `"5" - 3` → `2` (number). `2 + 2` → `4`.
 
 ---
 
-### 3. **Question: Count Vowels and Consonants**
-Write a function that counts the number of vowels and consonants in a string.
+## 3. booleans in math
 
-**Answer:**
+**Q.**
+
 ```js
-function countVowelsConsonants(str) {
-    let vowels = 0, consonants = 0;
-    str = str.toLowerCase();  // Convert string to lowercase to handle both cases
-    
-    for (let char of str) {
-        if ('aeiou'.includes(char)) {
-            vowels++;
-        } else if (char >= 'a' && char <= 'z') {
-            consonants++;
-        }
-    }
-
-    return { vowels, consonants };
-}
-
-console.log(countVowelsConsonants("Hello World"));  // { vowels: 3, consonants: 7 }
+console.log(true + false);
 ```
-### Explanation:
-The function uses the `.includes()` method to check if each character is a vowel and counts consonants by checking if the character is between 'a' and 'z'.
+
+**A.** `1`
+**Why:** `true → 1`, `false → 0`, so `1 + 0`.
 
 ---
 
-### 4. **Question: Reverse an Array**
-Write a function to reverse an array without using the built-in reverse method.
+## 4. objects with `+` (string conversion)
 
-**Answer:**
+**Q.**
+
 ```js
-function reverseArray(arr) {
-    let reversed = [];
-    for (let i = arr.length - 1; i >= 0; i--) {
-        reversed.push(arr[i]);
-    }
-    return reversed;
-}
-
-console.log(reverseArray([1, 2, 3, 4]));  // [4, 3, 2, 1]
+console.log([] + {}); // "[object Object]"
+console.log({} + []); // 0
 ```
-### Explanation:
-This function uses a `for` loop to iterate through the array from the last element to the first, and pushes each element into a new array.
+
+**A.**
+
+1. `"[object Object]"`
+2. `0`
+   **Why:** `{} is not an object here — at the start of a statement, JS treats it as an empty code block`.
+
+   - {} // empty block
+   - +[] // unary plus operator applied to []
+   - +[] → [] → "" → 0 (number)
+   - So the result is 0
+
+> ## more examples for practise
+
+```js
+console.log([] + []); // ""        ("" + "" → "")
+console.log([1, 2] + []); // "1,2"     ("1,2" + "" → "1,2")
+console.log([] + [3, 4]); // "3,4"     ("" + "3,4" → "3,4")
+console.log([1, 2] + [3]); // "1,23"    ("1,2" + "3" → "1,23")
+console.log({} + {}); // 0 at top-level (block + unary plus) — use ({} + {})
+console.log({} + {}); // "[object Object][object Object]"
+console.log([] + 1); // "1"       ("" + "1")
+console.log(1 + []); // "1"       ("1" + "")
+```
 
 ---
 
-### 5. **Question: Find the Second Largest Number**
-Write a function that finds the second largest number in an array.
+## 5. `==` vs `===`
 
-**Answer:**
+**Q.**
+
 ```js
-function findSecondLargest(arr) {
-    let largest = -Infinity, secondLargest = -Infinity;
-
-    for (let num of arr) {
-        if (num > largest) {
-            secondLargest = largest;
-            largest = num;
-        } else if (num > secondLargest && num !== largest) {
-            secondLargest = num;
-        }
-    }
-
-    return secondLargest;
-}
-
-console.log(findSecondLargest([1, 5, 3, 9, 2]));  // 5
+console.log(0 == "0", 0 === "0");
 ```
-### Explanation:
-This function keeps track of the largest and second largest values by updating them as it iterates through the array.
+
+**A.** `true false`
+**Why:** `==` does type coercion; `===` does not.
 
 ---
 
-### 6. **Question: Remove Duplicates from an Array**
-Write a function that removes duplicates from an array and returns the resulting array.
+## 6. sneaky: `[] == ![]`
 
-**Answer:**
+**Q.**
+
 ```js
-function removeDuplicates(arr) {
-    let uniqueArr = [];
-    for (let num of arr) {
-        if (!uniqueArr.includes(num)) {
-            uniqueArr.push(num);
-        }
-    }
-    return uniqueArr;
-}
-
-console.log(removeDuplicates([1, 2, 2, 3, 3, 4, 5]));  // [1, 2, 3, 4, 5]
+console.log([] == ![]);
 ```
-### Explanation:
-The function uses the `.includes()` method to check if the element is already present in the result array before adding it.
+
+**A.** `true`
+**Why:** `![]` → `false`. `[] == false` → `"" == 0` → `0 == 0` → `true`.
 
 ---
 
-### 7. **Question: Find the Sum of Digits of a Number**
-Write a function that takes a number as input and returns the sum of its digits.
+## 7. `null` in comparisons
 
-**Answer:**
+**Q.**
+
 ```js
-function sumOfDigits(num) {
-    let sum = 0;
-    num = Math.abs(num);  // Handle negative numbers
-    
-    while (num > 0) {
-        sum += num % 10;  // Add the last digit to the sum
-        num = Math.floor(num / 10);  // Remove the last digit
-    }
-
-    return sum;
-}
-
-console.log(sumOfDigits(12345));  // 15
+console.log(null == 0); // A
+console.log(null >= 0); // B
+console.log(null > 0); // C
 ```
-### Explanation:
-The function uses the modulus operator `%` to get the last digit and adds it to the sum. Then, it removes the last digit by dividing the number by 10 and taking the floor value.
+
+**A.** `false true false`
+**Why:**
+
+- `A:` `null` only loosely equals `undefined`.
+- Relational compares convert `null` to `0`. So `0 >= 0` true; `0 > 0` false.
 
 ---
 
-### 8. **Question: Check if a Number is a Power of Two**
-Write a function that checks if a number is a power of two.
+## 8. `undefined` in comparisons
 
-**Answer:**
+**Q.**
+
 ```js
-function isPowerOfTwo(num) {
-    if (num <= 0) return false;
-    return (num & (num - 1)) === 0;  // Bitwise AND operation
-}
-
-console.log(isPowerOfTwo(16));  // true
-console.log(isPowerOfTwo(18));  // false
+console.log(undefined == 0, undefined >= 0);
 ```
-### Explanation:
-The bitwise AND operation `(num & (num - 1))` checks if the number is a power of two. A power of two in binary representation has only one bit set, and this operation will return `0` if the number is a power of two.
+
+**A.** `false false`
+**Why:** `undefined` becomes `NaN` in relational compare → always false.
 
 ---
 
-### 9. **Question: Calculate the GCD (Greatest Common Divisor) of Two Numbers**
-Write a function to calculate the GCD of two numbers using the Euclidean algorithm.
+## 9. `NaN` weirdness
 
-**Answer:**
+**Q.**
+
 ```js
-function gcd(a, b) {
-    while (b !== 0) {
-        let temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return a;
-}
-
-console.log(gcd(48, 18));  // 6
+console.log(NaN === NaN, Object.is(NaN, NaN));
 ```
-### Explanation:
-This function uses the Euclidean algorithm to calculate the GCD of two numbers by repeatedly applying the modulus operator until the second number becomes 0. The first number will be the GCD.
+
+**A.** `false true`
+**Why:** `NaN` is never equal to itself with `===`. `Object.is` handles `NaN`.
 
 ---
 
-### 10. **Question: Rotate an Array**
-Write a function to rotate an array `k` times.
+## 10. postfix vs prefix
 
-**Answer:**
+**Q.**
+
 ```js
-function rotateArray(arr, k) {
-    k = k % arr.length;  // To handle rotation greater than array length
-    return [...arr.slice(-k), ...arr.slice(0, arr.length - k)];
-}
-
-console.log(rotateArray([1, 2, 3, 4, 5], 2));  // [4, 5, 1, 2, 3]
+let x = 5;
+console.log(x++ + ++x, x);
 ```
-### Explanation:
-The function first calculates the remainder of `k` divided by the array length, to handle cases where `k` is greater than the array size. Then it slices the array into two parts and reorders them.
+
+**A.** `12 7`
+**Why:** `x++` returns `5` then `x=6`. `++x` makes `x=7` and returns `7`. Sum `12`. Final `x=7`.
+
+---
+
+## 11. chained assignment / compound precedence
+
+**Q.**
+
+```js
+let a = 2,
+  b = 3;
+a += b *= 2;
+console.log(a, b);
+```
+
+**A.** `8 6`
+**Why:** Right-to-left: `b *= 2` → `6`. Then `a += 6` → `8`.
+
+---
+
+## 12. `&&` / `||` return **a value**, not just boolean
+
+**Q.**
+
+```js
+console.log(true || "x");
+console.log(false || "x");
+console.log(0 && "x");
+console.log("hi" && 42);
+```
+
+**A.**
+`true`
+`"x"`
+`0`
+`42`
+**Why:**
+
+- `||` returns first truthy, or last one.
+- `&&` returns first falsy, or last one.
+
+---
+
+## 13. `??` vs `||`
+
+**Q.**
+
+```js
+console.log(0 ?? 42, 0 || 42);
+console.log("" ?? "x", "" || "x");
+```
+
+**A.** `0 42` and `"" "x"`
+**Why:** `??` only uses right side when left is `null` or `undefined`.
+`||` uses right side when left is **falsy** (`0`, `""`, `false`, `NaN`, `null`, `undefined`).
+
+> Note: `??` cannot be mixed with `||`/`&&` without parentheses.
+
+---
+
+## 14. optional chaining call
+
+**Q.**
+
+```js
+const user = {};
+console.log(user.getName?.()); // A
+console.log(user.getName()); // B
+```
+
+**A.** `A: undefined` then `B:` **TypeError**
+**Why:** `?.()` only calls if function exists; else returns `undefined`. Plain call crashes.
+
+---
+
+## 15. ternary is right-associative
+
+**Q.**
+
+```js
+console.log(false ? "a" : false ? "b" : "c");
+```
+
+**A.** `"c"`
+**Why:** It’s `false ? "a" : (false ? "b" : "c")`.
+
+---
+
+## 16. comma operator
+
+**Q.**
+
+```js
+let a = 1;
+let r = ((a += 2), (a *= 3), a);
+console.log(r);
+```
+
+**A.** `9`
+**Why:** Runs left→right, returns **last** value: `a=3`, then `a=9`, returns `9`.
+
+---
+
+## 17. bitwise tricks
+
+**Q.**
+
+```js
+console.log(~1); // A
+console.log(~~3.7); // B
+console.log(-1 >>> 0); // C
+```
+
+**A.** `A: -2`, `B: 3`, `C: 4294967295`
+**Why:**
+
+- `~n` = `-(n+1)`.
+- `~~x` drops fraction (32-bit).
+- `>>> 0` makes unsigned 32-bit.
+
+---
+
+## 18. exponentiation precedence
+
+**Q.**
+
+```js
+// console.log(-2 ** 3);  // DANGER
+console.log(-(2 ** 3));
+```
+
+**A.** `-8`
+**Why:** `**` binds before unary `-`. `-2 ** 3` is a **SyntaxError**; use `-(2 ** 3)`.
+
+---
+
+## 19. `typeof` quirks
+
+**Q.**
+
+```js
+console.log(typeof null); // A
+console.log(typeof function () {}); // B
+```
+
+**A.** `"object"` and `"function"`
+**Why:** historical bug for `null`; functions report `"function"`.
+
+---
+
+## 20. `in` checks property existence
+
+**Q.**
+
+```js
+const arr = [10, 20, 30];
+delete arr[1];
+console.log(arr.length, 1 in arr, arr[1]);
+```
+
+**A.** `3 false undefined`
+**Why:** `delete` makes a hole (doesn’t shrink length). `in` checks if index exists.
+
+---
+
+## 21. `delete` limits
+
+**Q.**
+
+```js
+let obj = { a: 1 };
+console.log(delete obj.a); // A
+let x = 10;
+// console.log(delete x);      // B (in strict modules)
+```
+
+**A.** `true`; `B:` deleting `let/const` variable is **false/TypeError** (not deletable).
+**Why:** `delete` works on object properties, not on block-scoped vars.
+
+---
+
+## 22. `Object.is` vs `===` with zero
+
+**Q.**
+
+```js
+console.log(+0 === -0, Object.is(+0, -0));
+```
+
+**A.** `true false`
+**Why:** `===` treats them equal; `Object.is` can see the sign.
+
+---
+
+## 23. `instanceof` can fool you (different realms)
+
+**Q.**
+
+```js
+const iframeArray = [].constructor; // pretend from another realm
+console.log([] instanceof iframeArray);
+```
+
+**A.** `false` (often)
+**Why:** `instanceof` checks prototype chain. Across iframes/windows, constructors differ.
+
+---
+
+## 24. exponent assignment
+
+**Q.**
+
+```js
+let n = 3;
+n **= 3;
+console.log(n);
+```
+
+**A.** `27`
+**Why:** `**=` is exponentiation assignment.
+
+---
+
+## 25. unary `+` converts to number
+
+**Q.**
+
+```js
+console.log(+"", +"  12  ", +true, +null, +undefined);
+```
+
+**A.** `0 12 1 0 NaN`
+**Why:** fast number conversion.
+
+---
