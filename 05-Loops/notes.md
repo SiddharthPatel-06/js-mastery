@@ -1,6 +1,7 @@
 ## **05-Loops in JavaScript**
 
 ### **1. Introduction**
+
 Loops allow us to execute a block of code multiple times based on a specified condition. They help avoid repetitive code and improve code efficiency.
 
 ---
@@ -8,16 +9,19 @@ Loops allow us to execute a block of code multiple times based on a specified co
 ### **2. Types of Loops**
 
 #### **2.1 `for` Loop**
+
 Used when the number of iterations is known in advance.
 
 **Syntax:**
+
 ```javascript
-for (initialization; condition; increment/decrement) {
+for (initialization; condition; increment / decrement) {
   // Code to execute
 }
 ```
 
 **Example:**
+
 ```javascript
 for (let i = 1; i <= 5; i++) {
   console.log(`Iteration: ${i}`);
@@ -25,6 +29,7 @@ for (let i = 1; i <= 5; i++) {
 ```
 
 #### **Explanation:**
+
 1. **Initialization:** `let i = 1` sets the starting point.
 2. **Condition:** `i <= 5` is evaluated before each iteration.
 3. **Increment:** `i++` updates the counter after each iteration.
@@ -32,9 +37,11 @@ for (let i = 1; i <= 5; i++) {
 ---
 
 #### **2.2 `while` Loop**
+
 Used when the number of iterations is unknown but depends on a condition.
 
 **Syntax:**
+
 ```javascript
 while (condition) {
   // Code to execute
@@ -42,6 +49,7 @@ while (condition) {
 ```
 
 **Example:**
+
 ```javascript
 let count = 1;
 while (count <= 3) {
@@ -53,9 +61,11 @@ while (count <= 3) {
 ---
 
 #### **2.3 `do...while` Loop**
+
 Executes the code at least once, regardless of the condition.
 
 **Syntax:**
+
 ```javascript
 do {
   // Code to execute
@@ -63,6 +73,7 @@ do {
 ```
 
 **Example:**
+
 ```javascript
 let num = 5;
 do {
@@ -74,9 +85,11 @@ do {
 ---
 
 #### **2.4 `for...of` Loop**
+
 Iterates over iterable objects like arrays.
 
 **Example:**
+
 ```javascript
 let fruits = ["Apple", "Banana", "Mango"];
 for (let fruit of fruits) {
@@ -87,9 +100,11 @@ for (let fruit of fruits) {
 ---
 
 #### **2.5 `for...in` Loop**
+
 Iterates over object properties.
 
 **Example:**
+
 ```javascript
 const person = { name: "Siddh", age: 25, city: "Bhopal" };
 for (let key in person) {
@@ -97,14 +112,26 @@ for (let key in person) {
 }
 ```
 
+> ### 👉 What’s the difference between them, and when should we use which loop?
+
+| 🔄 Loop Type | ✅ When to Use                                                             | 📝 Example                     |
+| ------------ | -------------------------------------------------------------------------- | ------------------------------ |
+| `for`        | You **know the exact number of iterations**                                | Print numbers from 1–10        |
+| `while`      | You **don’t know** how many times it will run, depends on a condition      | Keep asking until `"stop"`     |
+| `do...while` | You want the code to **run at least once**, even if the condition is false | Ask for password at least once |
+| `for...of`   | You want to loop over **values of arrays, strings, sets, maps**            | Print all fruits in an array   |
+| `for...in`   | You want to loop over **object keys (properties)**                         | Print all keys of an object    |
+
 ---
 
 ### **3. Loop Control Statements**
 
 #### **3.1 `break` Statement**
+
 Exits the loop immediately.
 
 **Example:**
+
 ```javascript
 for (let i = 1; i <= 5; i++) {
   if (i === 3) {
@@ -116,9 +143,11 @@ for (let i = 1; i <= 5; i++) {
 ```
 
 #### **3.2 `continue` Statement**
+
 Skips the current iteration and continues with the next.
 
 **Example:**
+
 ```javascript
 for (let i = 1; i <= 5; i++) {
   if (i === 3) {
@@ -132,9 +161,11 @@ for (let i = 1; i <= 5; i++) {
 ---
 
 ### **4. Infinite Loops**
+
 Be cautious while using loops, as a condition that always evaluates to true can cause infinite loops.
 
 **Example (Avoid):**
+
 ```javascript
 while (true) {
   console.log("This will run forever!");
@@ -146,14 +177,16 @@ while (true) {
 ### **Practice Questions for Loops**
 
 #### **Basic-Level Questions**
+
 1. Print numbers from 1 to 10 using a `for` loop.
 2. Write a program to calculate the sum of numbers from 1 to 100 using a loop.
 3. Print all even numbers between 1 and 20 using a `while` loop.
 
 #### **Intermediate-Level Questions**
+
 4. Create a program to reverse an array using a loop.  
    **Input:** `[1, 2, 3, 4, 5]`  
-   **Output:** `[5, 4, 3, 2, 1]`  
+   **Output:** `[5, 4, 3, 2, 1]`
 
 5. Write a function to count the number of vowels in a string using a `for` loop.  
    **Input:** `"hello world"`  
@@ -163,8 +196,8 @@ while (true) {
    **Input Array:** `[3, 7, 9, 2, 8]`, stop at `9`.
 
 #### **Advanced-Level Questions**
+
 7. Create a program to generate the Fibonacci series up to a given number using a loop.
-   
 8. Write a function to check whether a number is prime using a loop.  
    **Input:** `7`  
    **Output:** `"7 is prime"`
@@ -176,21 +209,24 @@ while (true) {
 ---
 
 ### **Bonus Challenge**
+
 **FizzBuzz Problem:**  
-Write a program that prints numbers from 1 to 100.  
-- For multiples of 3, print `"Fizz"` instead of the number.  
-- For multiples of 5, print `"Buzz"`.  
-- For multiples of both 3 and 5, print `"FizzBuzz"`.  
-   
-**Expected Output:**  
+Write a program that prints numbers from 1 to 100.
+
+- For multiples of 3, print `"Fizz"` instead of the number.
+- For multiples of 5, print `"Buzz"`.
+- For multiples of both 3 and 5, print `"FizzBuzz"`.
+
+**Expected Output:**
+
 ```
-1  
-2  
-Fizz  
-4  
-Buzz  
-Fizz  
-...  
+1
+2
+Fizz
+4
+Buzz
+Fizz
+...
 FizzBuzz
 ```
 
